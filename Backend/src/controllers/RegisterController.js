@@ -1,17 +1,25 @@
-const { ObjectId } = require("mongodb");
+const { ObjectId, MongoClient } = require("mongodb");
 
 const AppError = require("../utils/AppError");
-const client = require("../database/mongo");
+// const client = require("../database/mongo");
 const isCpfValid = require("../utils/CpfValidator");
 const DbConstants = require("../utils/DbConstants");
 
+const dotenv = require("dotenv");
+
+dotenv.config();
+const uri = process.env.MONGO_URI;
+
 class RegisterController {
+  
   async create(request, response) {
+    const client = new MongoClient(uri)
     const db = client.db(DbConstants.DB_NAME);
     const { name, cpf, birthDate } = request.body;
 
     try {
       await client.connect();
+      console.log(cpf)
 
       const validCpf = isCpfValid(cpf);
       if (!validCpf) {
@@ -31,7 +39,7 @@ class RegisterController {
         .collection(DbConstants.DB_COLLECTION)
         .insertOne({ name: name, cpf: cpf, birthDate: birthDate });
 
-      response.json({}).status(201).send();
+      response.json({}).status(201);
     } finally {
       client.close();
     }
@@ -39,6 +47,7 @@ class RegisterController {
 
   async update(request, response) {
     const { id } = request.query;
+    const client = new MongoClient(uri)
     const db = client.db(DbConstants.DB_NAME);
 
     try {
@@ -48,7 +57,7 @@ class RegisterController {
         .collection(DbConstants.DB_COLLECTION)
         .updateOne({ _id: new ObjectId(id) }, { $set: request.body });
 
-      response.status(200).json({}).send();
+      response.json({}).status(200);
     } finally {
       client.close();
     }
@@ -56,6 +65,7 @@ class RegisterController {
 
   async delete(request, response) {
     const { id } = request.query;
+    const client = new MongoClient(uri)
     const db = client.db(DbConstants.DB_NAME);
 
     try {
@@ -65,13 +75,14 @@ class RegisterController {
         .collection(DbConstants.DB_COLLECTION)
         .deleteOne({ _id: new ObjectId(id) });
 
-      response.status(200).json({}).send();
+      response.json({}).status(200);
     } finally {
       client.close();
     }
   }
 
-  async index(request, response) {
+  async getAll(request, response) {
+    const client = new MongoClient(uri)
     const db = client.db(DbConstants.DB_NAME);
 
     try {
@@ -81,11 +92,11 @@ class RegisterController {
         .collection(DbConstants.DB_COLLECTION)
         .find()
         .map((doc) => {
-          return { id: doc._id, name: doc.name, birthDate: doc.birthDate };
+          return { id: doc._id, name: doc.name, birthDate: doc.birthDate, cpf: doc.cpf };
         })
         .toArray();
 
-      response.status(200).json(list).send();
+      response.status(201).json(list)
     } finally {
       client.close();
     }
