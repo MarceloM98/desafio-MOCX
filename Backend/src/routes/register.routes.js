@@ -8,7 +8,7 @@ const registerController = new RegisterController();
 
 registerRoutes.post("/", registerController.create);
 registerRoutes.delete("/", registerController.delete);
-registerRoutes.put("/", registerController.update);
+registerRoutes.put("/:id", registerController.update);
 registerRoutes.get("/", registerController.getAll);
 
 module.exports = registerRoutes;

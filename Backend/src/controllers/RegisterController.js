@@ -11,19 +11,17 @@ dotenv.config();
 const uri = process.env.MONGO_URI;
 
 class RegisterController {
-  
   async create(request, response) {
-    const client = new MongoClient(uri)
+    const client = new MongoClient(uri);
     const db = client.db(DbConstants.DB_NAME);
     const { name, cpf, birthDate } = request.body;
 
     try {
       await client.connect();
-      console.log(cpf)
 
       const validCpf = isCpfValid(cpf);
       if (!validCpf) {
-        response.send(new AppError("Cpf inválido.", 400));
+        response.status(400).json(new AppError("Cpf inválido.", 400));
         return;
       }
 
@@ -31,7 +29,7 @@ class RegisterController {
         .collection(DbConstants.DB_COLLECTION)
         .findOne({ cpf: cpf });
       if (user) {
-        response.send(new AppError("Cpf já existe.", 400));
+        response.status(400).json(new AppError("Cpf já existe.", 400));
         return;
       }
 
@@ -39,15 +37,15 @@ class RegisterController {
         .collection(DbConstants.DB_COLLECTION)
         .insertOne({ name: name, cpf: cpf, birthDate: birthDate });
 
-      response.json({}).status(201);
+      response.status(201).json({});
     } finally {
       client.close();
     }
   }
 
   async update(request, response) {
-    const { id } = request.query;
-    const client = new MongoClient(uri)
+    const { id } = request.params;
+    const client = new MongoClient(uri);
     const db = client.db(DbConstants.DB_NAME);
 
     try {
@@ -65,7 +63,7 @@ class RegisterController {
 
   async delete(request, response) {
     const { id } = request.query;
-    const client = new MongoClient(uri)
+    const client = new MongoClient(uri);
     const db = client.db(DbConstants.DB_NAME);
 
     try {
@@ -82,7 +80,7 @@ class RegisterController {
   }
 
   async getAll(request, response) {
-    const client = new MongoClient(uri)
+    const client = new MongoClient(uri);
     const db = client.db(DbConstants.DB_NAME);
 
     try {
@@ -92,11 +90,16 @@ class RegisterController {
         .collection(DbConstants.DB_COLLECTION)
         .find()
         .map((doc) => {
-          return { id: doc._id, name: doc.name, birthDate: doc.birthDate, cpf: doc.cpf };
+          return {
+            id: doc._id,
+            name: doc.name,
+            birthDate: doc.birthDate,
+            cpf: doc.cpf,
+          };
         })
         .toArray();
 
-      response.status(201).json(list)
+      response.status(201).json(list);
     } finally {
       client.close();
     }

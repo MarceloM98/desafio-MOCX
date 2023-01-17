@@ -2,59 +2,96 @@ import { Container } from "./styles";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api";
 
+import { FormModal } from "../../components/FormModal";
 import { Header } from "../../components/header";
 import { PageTitle } from "../../components/PageTitle";
 import { Footer } from "../../components/Footer";
 import { Card } from "../../components/Card";
 
 export function List() {
-  const [registers, setPerson] = useState([]);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [registerId, setRegisterId] = useState("");
+  const [name, setName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [registers, setRegisters] = useState([]);
 
   useEffect(() => {
     async function fetchPerson() {
-      await fetch()
+      await fetch();
     }
     fetchPerson();
   }, []);
 
   async function fetch() {
     const response = await api.get("/register");
-    setPerson(response.data);
+    setRegisters(response.data);
   }
 
-  function teste2(id){
-    async function teste(){
-      await api.delete('/register', {params:{id:id}})
-      await fetch()
+  function deleteRegister(id) {
+    async function deleteById() {
+      await api.delete("/register", { params: { id: id } });
+      await fetch();
     }
-    teste()
+    deleteById();
+  }
+
+  function openModal(id, username, userBirthDate) {
+    setIsOpen(true);
+    setName(username);
+    setBirthDate(userBirthDate);
+    setRegisterId(id);
+  }
+
+  async function updateModal() {
+    closeModal();
+    updateRegister();
+  }
+
+  async function closeModal() {
+    setIsOpen(false);
+  }
+
+  function updateRegister() {
+    async function updateById() {
+      await api.put(`/register/${registerId}`, { name: name, birthDate: birthDate });
+      await fetch();
+    }
+    updateById();
   }
 
   return (
     <Container>
-      <div className="teste1">
+      <FormModal
+        modalIsOpen={modalIsOpen}
+        updateModal={updateModal}
+        closeModal={closeModal}
+        setName={setName}
+        setBirthDate={setBirthDate}
+        currentName = {name}
+        currentBirthDate = {birthDate}
+      ></FormModal>
+      <div>
         <Header></Header>
         <PageTitle title="Registro de cadastros"></PageTitle>
       </div>
 
       <main>
-        <div className="wrapper">
-          {
-            registers.map((person) => (
-              <div key={String(person.id)}>
-                <Card
-                  name={person.name}
-                  birthDate={person.birthDate}
-                  cpf={person.cpf}
-                  onDeleteClick={()=>teste2(person.id)}
-                ></Card>
-              </div>
-            ))}
+        <div className="cards-wrapper">
+          {registers.map((person) => (
+            <div key={String(person.id)}>
+              <Card
+                person={person}
+                onUpdateClick={() =>
+                  openModal(person.id, person.name, person.birthDate)
+                }
+                onDeleteClick={() => deleteRegister(person.id)}
+              ></Card>
+            </div>
+          ))}
         </div>
-
       </main>
 
-      <div className="teste2">
+      <div>
         <Footer></Footer>
       </div>
     </Container>

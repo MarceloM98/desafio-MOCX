@@ -1,17 +1,17 @@
 import { Container } from './styles'
 
 
-export function Card({name, birthDate, cpf, onDeleteClick}){
+export function Card({person, onUpdateClick, onDeleteClick}){
 
   return(
     <Container>
       <div className="info">
-        <p>{name}</p>
-        <p>{birthDate}</p>
-        <p>{cpf}</p>
+        <p>{person.name}</p>
+        <p>{person.birthDate}</p>
+        <p>{person.cpf}</p>
       </div>
       <div className='controls'>
-        <button>U</button>
+        <button onClick={onUpdateClick}>U</button>
         <button onClick={onDeleteClick}>X</button>
       </div>
     </Container>
