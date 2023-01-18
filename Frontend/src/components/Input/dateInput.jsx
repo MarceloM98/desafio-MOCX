@@ -7,7 +7,7 @@ export function DateInput({ date, onChange }) {
   const [inputType, setInputType] = useState("text");
 
   function formatInitialDate() {
-    return date ? new Date(date).toLocaleDateString("pt-BR") : "";
+    return date ? new Date(date).toLocaleDateString("pt-BR",{timeZone: 'UTC'}) : "";
   }
 
   function handleDateChange(event) {

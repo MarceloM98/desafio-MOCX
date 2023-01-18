@@ -15,7 +15,7 @@ export function Card({ person, onUpdateClick, onDeleteClick }) {
           </div>
           <div className="features">
             <ul>
-              <li>{person.name}</li>
+              <li className="name-display">{person.name}</li>
               <li>{formatDate(person.birthDate)}</li>
               <li>{formatCpf(person.cpf)}</li>
             </ul>

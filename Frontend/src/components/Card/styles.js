@@ -18,12 +18,6 @@ export const Container = styled.div`
     justify-content: space-around;
   }
 
-  .card:nth-child(2) {
-    margin: 20px 0px;
-    width: 33.3333%;
-    padding: 50px 20px;
-  }
-
   .icon > svg {
     width: 5rem;
     height: 5rem;
@@ -41,6 +35,10 @@ export const Container = styled.div`
     font-size: 2.5rem;
   }
 
+  .name-display{
+    min-height: 6rem;
+  }
+
   .btn {
     display: block;
     background: #f6b352;
@@ -55,6 +53,4 @@ export const Container = styled.div`
     color: black;
   }
 
-  .btn:hover {
-  }
 `;

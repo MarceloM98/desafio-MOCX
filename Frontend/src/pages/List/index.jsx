@@ -47,6 +47,9 @@ export function List() {
   }
 
   async function updateModal() {
+    if (birthDate > "2023-01-17" || birthDate < "1900-01-01") {
+      return alert("Data de nascimento invalida");
+    }
     const isConfirmed = confirm("Atualizar usuário?");
     if (!isConfirmed) return;
     closeModal();

@@ -1,7 +1,6 @@
 const { ObjectId, MongoClient } = require("mongodb");
 
 const AppError = require("../utils/AppError");
-// const client = require("../database/mongo");
 const isCpfValid = require("../utils/CpfValidator");
 const DbConstants = require("../utils/DbConstants");
 
