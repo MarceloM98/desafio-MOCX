@@ -1,13 +1,13 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from "react-router-dom";
 
-import { Register } from '../pages/Register'
-import { List } from '../pages/List'
+import { Registers } from "../pages/Registers";
+import { List } from "../pages/List";
 
-export function AppRoutes(){
-  return(
+export function AppRoutes() {
+  return (
     <Routes>
-      <Route path='/' element={<Register />}/>
-      <Route path='/list' element={<List />}/>
+      <Route path="/" element={<Registers />} />
+      <Route path="/list" element={<List />} />
     </Routes>
-  )
+  );
 }

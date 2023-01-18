@@ -24,7 +24,6 @@ export const Container = styled.div`
     }
   }
 
-
   > svg {
     color: #000;
     margin-left: 16px;

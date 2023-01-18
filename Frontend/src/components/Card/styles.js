@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
- .card {
+  .card {
     background: #1f2124;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     border-radius: 5px;
@@ -45,9 +45,9 @@ export const Container = styled.div`
     display: block;
     background: #f6b352;
     padding: 5px;
-    
+
     width: 9rem;
-    
+
     border-radius: 15px;
     text-decoration: none;
   }
@@ -56,6 +56,5 @@ export const Container = styled.div`
   }
 
   .btn:hover {
-
   }
 `;

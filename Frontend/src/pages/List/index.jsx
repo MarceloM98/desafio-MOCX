@@ -32,9 +32,9 @@ export function List() {
       await api.delete("/register", { params: { id: id } });
       await fetch();
     }
-    const isConfirmed = confirm("excluir usuário?")
-    if(!isConfirmed){
-      return
+    const isConfirmed = confirm("excluir usuário?");
+    if (!isConfirmed) {
+      return;
     }
     deleteById();
   }
@@ -47,8 +47,8 @@ export function List() {
   }
 
   async function updateModal() {
-    const isConfirmed = confirm('Atualizar usuário?')
-    if(!isConfirmed) return
+    const isConfirmed = confirm("Atualizar usuário?");
+    if (!isConfirmed) return;
     closeModal();
     updateRegister();
   }
@@ -59,13 +59,14 @@ export function List() {
 
   function updateRegister() {
     async function updateById() {
-      await api.put(`/register/${registerId}`, { name: name, birthDate: birthDate });
+      await api.put(`/register/${registerId}`, {
+        name: name,
+        birthDate: birthDate,
+      });
       await fetch();
     }
     updateById();
   }
-
-
 
   return (
     <Container>
@@ -75,8 +76,8 @@ export function List() {
         closeModal={closeModal}
         setName={setName}
         setBirthDate={setBirthDate}
-        currentName = {name}
-        currentBirthDate = {birthDate}
+        currentName={name}
+        currentBirthDate={birthDate}
       ></FormModal>
       <div>
         <Header></Header>

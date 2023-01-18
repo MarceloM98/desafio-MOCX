@@ -17,7 +17,7 @@ export const Container = styled.section`
     align-items: center;
 
     padding-left: 15rem;
-    border-bottom: 5px solid #CCC;
-    border-top: 5px solid #CCC;
+    border-bottom: 5px solid #ccc;
+    border-top: 5px solid #ccc;
   }
 `;

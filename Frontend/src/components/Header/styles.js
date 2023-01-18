@@ -5,15 +5,40 @@ export const Container = styled.header`
   height: 10rem;
 
   display: flex;
-  padding: 2rem 0 2rem 15rem;
+  padding: 2rem 4rem 2rem 15rem;
 
   justify-content: space-between;
+  
+  @media (max-width: 870px){
+    padding-left: 8rem;
+  }
+
+  @media (max-width: 630px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  @media (max-width:500px){
+    align-items: center;
+
+    .logo{
+      max-width: 18rem;
+      max-height: 6rem;
+    }
+  }
+
+  @media (max-width: 340px){
+    padding: 0 .5rem;
+  }
 
   nav {
     display: flex;
     align-items: center;
     gap: 3rem;
-    padding-right: 4rem;
+    @media (max-width:500px){
+      gap: 2px;
+      flex-direction: column;
+    }
   }
   nav a button {
     background-color: #1f2124;
