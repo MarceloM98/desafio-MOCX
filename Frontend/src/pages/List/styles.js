@@ -11,8 +11,9 @@ export const Container = styled.div`
     margin: 2rem;
   }
   .cards-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
   }
 `

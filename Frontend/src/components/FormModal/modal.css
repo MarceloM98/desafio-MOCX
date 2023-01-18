@@ -5,7 +5,7 @@
 }
 
 .modal-overlay {
-  background-color: #ececec;
+  background-color: rgba(126, 126, 126, 0.61);
   position: fixed;
   top: 0;
   bottom: 0;
@@ -18,27 +18,36 @@
 }
 
 .modal-content {
+  box-shadow: 3px 3px 3px rgb(73, 73, 73);
   width: 90%;
   max-width: 50rem;
-  background-color: black;
+  background-color: #1f2124;
   padding: 10px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
 }
 
-.modal-form{
+.modal-form {
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.button-wrapper{
+.button-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   gap: 3rem;
+  padding: 2rem;
 }
-button{
-    max-width: 20rem;
+
+.button {
+  width: 20rem;
+  height: 4rem;
+  background: #f6b352;
+  color: black;
+  
+  border-radius: 15px;
+  text-decoration: none;
 }

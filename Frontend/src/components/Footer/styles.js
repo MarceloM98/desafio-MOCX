@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.footer`
   width: 100%;
-  height: 10rem;
-  background-color: #171717;
+  height: 7rem;
+  background-color: #1f2124;
   display: flex;
   align-items: center;
 

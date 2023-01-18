@@ -32,6 +32,10 @@ export function List() {
       await api.delete("/register", { params: { id: id } });
       await fetch();
     }
+    const isConfirmed = confirm("excluir usuário?")
+    if(!isConfirmed){
+      return
+    }
     deleteById();
   }
 
@@ -43,6 +47,8 @@ export function List() {
   }
 
   async function updateModal() {
+    const isConfirmed = confirm('Atualizar usuário?')
+    if(!isConfirmed) return
     closeModal();
     updateRegister();
   }
@@ -58,6 +64,8 @@ export function List() {
     }
     updateById();
   }
+
+
 
   return (
     <Container>

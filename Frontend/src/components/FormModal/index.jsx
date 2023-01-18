@@ -39,8 +39,8 @@ export function FormModal({
           />
         </form>
         <div className="button-wrapper">
-          <button onClick={closeModal}>Cancelar</button>
-          <button onClick={updateModal}>Atualizar</button>
+          <button className="button" onClick={closeModal}>Cancelar</button>
+          <button className="button" onClick={updateModal}>Atualizar</button>
         </div>
       </Modal>
     </div>

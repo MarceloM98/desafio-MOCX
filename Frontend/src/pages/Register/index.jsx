@@ -9,7 +9,7 @@ import { CpfInput } from "../../components/Input/cpfInput";
 import { DateInput } from "../../components/Input/dateInput";
 
 import { Header } from "../../components/header";
-import { Section } from "../../components/Section";
+import { PageTitle } from "../../components/PageTitle";
 import { Footer } from "../../components/Footer";
 
 export function Register() {
@@ -23,6 +23,9 @@ export function Register() {
     event.preventDefault();
     if (!name || !birthDate || !cpf) {
       return alert("Preencha todos os campos.");
+    }
+    if(birthDate > '2023-01-17' || birthDate < '1900-01-01'){
+      return alert("Data de nascimento invalida")
     }
     await api
       .post("/register", { name, birthDate, cpf })
@@ -41,26 +44,28 @@ export function Register() {
 
   return (
     <Container>
-      <Header></Header>
-
-      <Section title="Cadastro de Pessoa">
-        <Form>
-          <Input
-            placeholder="Nome"
-            type="text"
-            icon={FiUser}
-            onChange={(event) => setName(event.target.value)}
-          />
-          <DateInput onChange={(date) => setBirthDate(date)} />
-          <CpfInput onChange={(cpf) => setCpf(cpf)} />
-          <button
-            className="register-button"
-            onClick={(event) => handleRegister(event)}
-          >
-            Cadastrar
-          </button>
-        </Form>
-      </Section>
+      <div>
+        <Header></Header>
+        <PageTitle title='Cadastro'></PageTitle>
+      </div>
+        <main>
+          <Form>
+            <Input
+              placeholder="Nome"
+              type="text"
+              icon={FiUser}
+              onChange={(event) => setName(event.target.value)}
+            />
+            <DateInput onChange={(date) => setBirthDate(date)} />
+            <CpfInput onChange={(cpf) => setCpf(cpf)} />
+            <button
+              className="register-button"
+              onClick={(event) => handleRegister(event)}
+            >
+              Cadastrar
+            </button>
+          </Form>
+        </main>
 
       <Footer></Footer>
     </Container>

@@ -1,21 +1,15 @@
-import { Container } from "./styles";
 import { FiKey } from "react-icons/fi";
 import { useState } from "react";
+
+import { Container } from "./styles";
+import { formatCpf } from "../../helpers/cpfFormatter";
 
 export function CpfInput({ cpf, onChange }) {
   const [formattedCpf, setCpf] = useState(cpf ?? "");
 
   function handleCpfChange(event) {
-    const cpfMask = (value) => {
-      return value
-        .replace(/\D/g, "")
-        .replace(/(\d{3})(\d)/, "$1.$2")
-        .replace(/(\d{3})(\d)/, "$1.$2")
-        .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-        .replace(/(-\d{2})\d+?$/, "$1");
-    };
+    const newFormattedCpf = formatCpf(event.target.value);
 
-    const newFormattedCpf = cpfMask(event.target.value);
     setCpf(newFormattedCpf);
     onChange(newFormattedCpf.replace(/[^0-9]/g, ""));
   }
@@ -25,7 +19,7 @@ export function CpfInput({ cpf, onChange }) {
       <FiKey size={20} />
       <input
         onChange={handleCpfChange}
-        placeholder="cpf"
+        placeholder="CPF"
         type="text"
         value={formattedCpf}
       />

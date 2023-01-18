@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.h2`
-    background-color: #171717;
+    background-color: #1f2124;
     color: white;
 
     height: 10rem;

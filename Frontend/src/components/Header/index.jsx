@@ -8,8 +8,8 @@ export function Header() {
         alt="logo MOCX"
       />
       <nav>
-        <a href="/">Cadastrar</a>
-        <a href="/list">Registro</a>
+        <a href="/"><button>Cadastrar</button></a>
+        <a href="/list"><button>Registros</button></a>
       </nav>
     </Container>
   );
